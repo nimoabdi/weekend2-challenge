@@ -39,11 +39,19 @@ function appendToDom() {
     method: 'GET'
 }).then((response)=>{
     console.log('GEt IS WORKING', response);
-    $('#answerList').empty();
-    for (let thing of response) {
-
-    }
-
+  for (let num of response) {
+    let answers = Math.round(`${num.answers}
+    `) 
+    $('#answers').empty();
+    $('#answers').append(answers)
+    $('#answerList').append(`
+    <li>${num.mathOne}
+        ${num.mathTwo}
+        ${num.simpleMathOperator} = {answers}</li>
+    `)
+  }
+    
+  
     
 })
 }

@@ -15,6 +15,17 @@ app.use(express.static('server/public'));
 
 // putting code here
 
+const mathNumbers =[];
+
+// function numbersCalculation(){
+//   if(mathNumbers[0].)
+// }
+
+
+
+
+
+
 app.get('/math', (req, res)=>{
     console.log('test GET');
     res.send(math);
