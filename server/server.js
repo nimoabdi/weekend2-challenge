@@ -2,8 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
 
+
 const PORT = 5000;
-const math = [];
+
+let math = [];
+let theNumber;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -17,6 +20,11 @@ app.get('/math', (req, res)=>{
     res.send(math);
   })
 
+ 
+  app.post('/math', (req, res)=>{
+    console.log('test POST');
+    res.send(math);
+  })
 
 
 
