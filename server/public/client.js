@@ -18,7 +18,7 @@ function equationValue() {
     operator: mathOp
   }
   $.ajax({
-    url: '/math',
+    url: '/mathsInputs',
     method: 'POST',
     data: theNumber
 }).then((response)=>{
@@ -33,28 +33,41 @@ function equationValue() {
 }
 
 
-function appendToDom() {
   $.ajax({ 
-    url: '/math',
+    url: '/maths',
     method: 'GET'
 }).then((response)=>{
     console.log('GEt IS WORKING', response);
-  for (let num of response) {
-    let answers = Math.round(`${num.answers}
-    `) 
-    $('#answers').empty();
-    $('#answers').append(answers)
-    $('#answerList').append(`
-    <li>${num.mathOne}
-        ${num.mathTwo}
-        ${num.simpleMathOperator} = {answers}</li>
-    `)
-  }
-    
-  
-    
+
+
 })
+
+function appendToDom() {
+
+  $('#answers').empty();
+  $('#answers').append(`
+  
+  `)
+  // let answerList = Math.round(`${num.answerList}`)
+  $(`#answerList`).empty();
+  
+for (let num of allTheAnswers) {
+  // let answerList = Math.round(`${num.answerList}`)
+  $(`#answerList`).append(answerList)(`
+  <li>${num.mathOne}
+    ${num.mathTwo}
+    ${num.simpleMathOperator} = ${num.maths}`)
+  
+    let answerList = Math.round(`${num.answerList}`)
+    console.log('this should show the answers on dom', allTheAnswers)
+}  
 }
+
+
+
+
+  
+
 
 
 function mathServer() {

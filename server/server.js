@@ -5,7 +5,7 @@ const app = express();
 
 const PORT = 5000;
 
-let math = [];
+let maths = [];
 let theNumber;
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -15,7 +15,9 @@ app.use(express.static('server/public'));
 
 // putting code here
 
-const mathNumbers =[];
+// const mathNumbers =[];
+
+
 
 // function numbersCalculation(){
 //   if(mathNumbers[0].)
@@ -23,20 +25,41 @@ const mathNumbers =[];
 
 
 
+// mathNumbers (theInputs)
+// maths.push(theInputs);
+// console.log('this pushes the inputs', mathNumbers);
 
 
 
-app.get('/math', (req, res)=>{
-    console.log('test GET');
-    res.send(math);
-  })
+app.get('/maths', (req, res)=>{
+  console.log('test GET');
+  res.send(maths);
+})
 
- 
-  app.post('/math', (req, res)=>{
-    console.log('test POST');
-    res.send(math);
-  })
 
+app.post('/mathsInputs', (req, res)=>{
+  let theInputs = req.body;
+  console.log('hope this works', theInputs);
+  
+  mathNumbers (theInputs)
+  maths.push(theInputs);
+  console.log('this pushes the inputs', mathNumbers);
+  
+  // console.log('test POST');
+  res.sendStatus(201);
+})
+
+function mathNumbers(log) {
+  if (log.simpleMathOperator === '+') {
+    addTheInputs(log);
+  }
+}
+
+function addTheInputs(addition) {
+  addition.mathAnswers = Number(addition.inputOne) + Number(addition.inputTwo);
+
+  console.log('adding the numbers', addTheInputs)
+}
 
 
 
@@ -46,5 +69,5 @@ app.get('/math', (req, res)=>{
 
 
 app.listen(PORT, () => {
-    console.log ('Server is running on port', PORT)
-  })
+  console.log ('Server is running on port', PORT)
+})
