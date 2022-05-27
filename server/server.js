@@ -5,8 +5,10 @@ const app = express();
 
 const PORT = 5000;
 
-let maths = [];
+
+let history = [];
 let theNumber;
+let answerValue;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -15,57 +17,38 @@ app.use(express.static('server/public'));
 
 // putting code here
 
-// const mathNumbers =[];
 
 
+app.post('/maths', (req, res)=>{
+  theNumber = req.body;
+  console.log('hope this works');
+  equationIn();
 
-// function numbersCalculation(){
-//   if(mathNumbers[0].)
-// }
-
-
-
-// mathNumbers (theInputs)
-// maths.push(theInputs);
-// console.log('this pushes the inputs', mathNumbers);
-
-
-
-app.get('/maths', (req, res)=>{
-  console.log('test GET');
-  res.send(maths);
-})
-
-
-app.post('/mathsInputs', (req, res)=>{
-  let theInputs = req.body;
-  console.log('hope this works', theInputs);
-  
-  mathNumbers (theInputs)
-  maths.push(theInputs);
-  console.log('this pushes the inputs', mathNumbers);
   
   // console.log('test POST');
   res.sendStatus(201);
 })
 
-function mathNumbers(log) {
-  if (log.simpleMathOperator === '+') {
-    addTheInputs(log);
-  }
+app.get('/maths', (req, res)=>{
+  console.log('test GET');
+  res.send(maths);
+})
+function equationIn() {
+switch (theNumber.simpleMathOperator) {
+  case '+':
+   answer  =  Number(theNumber.mathOne) + Number(theNumber.mathTwo)
+    break;
+  case '-':
+    answer = Number(theNumber.mathOne) * Number(theNumber.mathTwo) 
+    break;
+    case '*':
+      answer = Number(theNumber.mathOne) - Number(theNumber.mathTwo) 
+    break;
+   case '/':
+    answer = Number(theNumber.mathOne) / Number(theNumber.mathTwo) 
+     break; 
 }
-
-function addTheInputs(addition) {
-  addition.mathAnswers = Number(addition.inputOne) + Number(addition.inputTwo);
-
-  console.log('adding the numbers', addTheInputs)
 }
-
-
-
-
-
-
 
 
 app.listen(PORT, () => {
