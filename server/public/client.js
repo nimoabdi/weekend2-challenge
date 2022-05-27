@@ -2,24 +2,25 @@ $(document).ready(handleReady);
 
 
 let numberOne;
-let operator;
+let simpleMathOperator;
 let numberTwo;
 
 function handleReady() {
     console.log("jquery is loaded!")
-  $('#simpleMathOperator').on('click', mathServer)  
+  $('.simpleMathOperator').on('click', mathServer)  
   $('#equals').on('click', equationValue)  
   $('#clear').on('click', clearButton)  
 
   }
 
-let mathOp;
+
 
 function equationValue() {
   let theNumber = {
-    numberOne: $('#mathOne').val(),
-    numberTwo: $('#mathTwo').val(),
-    operator: mathOp
+    mathOne: $('#number1').val(),
+    mathTwo: $('#number2').val(),
+    operator: simpleMathOperator
+   
   }
   $.ajax({
     url: '/mathsInputs',
@@ -28,7 +29,7 @@ function equationValue() {
 }).then((response)=>{
   console.log('POST works', response);
 
-  appendToDom()
+  gettingHistory();
 
 }).catch((error)=>{
   console.log('POST FAILED', error)
@@ -36,24 +37,47 @@ function equationValue() {
   
 }
 
-function appendToDom() {
+function gettingHistory() {
   $.ajax({ 
     url: '/maths',
     method: 'GET'
 }).then((response)=>{
-    console.log('GEt IS WORKING', response);
+    console.log('GEt IS WORKING', response)
 
+    appendDom(response);
 
-})
+  }).catch((error)=>{
+    console.log('POST FAILED', error)
+  })
+//     $('#answer').empty();
+//     $('#history').empty();
+//     for (let equation of response) {
+//       let total = Math.round(`${equation.answer}`) 
+//     $('.answer').append(total)
+//     $('.history').append(` 
+//       <li>${equation.numberOne} ${equation.operator} ${equation.numberTwo} = ${answer}</li>
+//     `)
+//   }
+// })
+
+}
+
+function appendDom(response) {
+    $('#history').empty();
+    for (let equation of response) {
+    $('#history').append(` 
+      <li>${equation.numberOne} ${equation.simpleMathOperator} ${equation.numberTwo} = ${answer}</li>
+    `)
+  }
 }
 
 
 
 function mathServer() {
-  mathOp = $(this).text()
+  simpleMathOperator = $(this).text()
   }
 
-  function clearButton() {
+function clearButton() {
     $('#mathOne').val('');
     $('#simpleMathOperator').val('');
     $('#mathTwo').val('')
