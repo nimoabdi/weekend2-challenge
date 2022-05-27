@@ -20,10 +20,11 @@ function equationValue() {
     mathOne: $('#number1').val(),
     mathTwo: $('#number2').val(),
     operator: simpleMathOperator
-   
+  }  
+  
   }
   $.ajax({
-    url: '/mathsInputs',
+    url: '/mathsInput',
     method: 'POST',
     data: theNumber
 }).then((response)=>{
@@ -35,7 +36,7 @@ function equationValue() {
   console.log('POST FAILED', error)
 })
   
-}
+
 
 function gettingHistory() {
   $.ajax({ 
@@ -64,9 +65,9 @@ function gettingHistory() {
 
 function appendDom(response) {
     $('#history').empty();
-    for (let equation of response) {
+    for (let calcObject of response.historyIn) {
     $('#history').append(` 
-      <li>${equation.numberOne} ${equation.simpleMathOperator} ${equation.numberTwo} = ${answer}</li>
+      <li>${calcObject.number1} ${calcObject.simpleMathOperator} ${calcObject.number2} = ${answer}</li>
     `)
   }
 }
