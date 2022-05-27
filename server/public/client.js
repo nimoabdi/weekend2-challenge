@@ -1,6 +1,10 @@
 $(document).ready(handleReady);
 
 
+let numberOne;
+let operator;
+let numberTwo;
+
 function handleReady() {
     console.log("jquery is loaded!")
   $('#simpleMathOperator').on('click', mathServer)  
@@ -32,7 +36,7 @@ function equationValue() {
   
 }
 
-
+function appendToDom() {
   $.ajax({ 
     url: '/maths',
     method: 'GET'
@@ -41,32 +45,7 @@ function equationValue() {
 
 
 })
-
-function appendToDom() {
-
-  $('#answers').empty();
-  $('#answers').append(`
-  
-  `)
-  // let answerList = Math.round(`${num.answerList}`)
-  $(`#answerList`).empty();
-  
-for (let num of allTheAnswers) {
-  // let answerList = Math.round(`${num.answerList}`)
-  $(`#answerList`).append(answerList)(`
-  <li>${num.mathOne}
-    ${num.mathTwo}
-    ${num.simpleMathOperator} = ${num.maths}`)
-  
-    let answerList = Math.round(`${num.answerList}`)
-    console.log('this should show the answers on dom', allTheAnswers)
-}  
 }
-
-
-
-
-  
 
 
 
