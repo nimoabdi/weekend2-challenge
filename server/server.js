@@ -38,10 +38,10 @@ switch (theNumber.simpleMathOperator) {
   case '+':
    answer  =  Number(theNumber.mathOne) + Number(theNumber.mathTwo)
     break;
-  case '-':
+  case '*':
     answer = Number(theNumber.mathOne) * Number(theNumber.mathTwo) 
     break;
-    case '*':
+    case '-':
       answer = Number(theNumber.mathOne) - Number(theNumber.mathTwo) 
     break;
    case '/':
