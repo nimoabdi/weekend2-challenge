@@ -2,8 +2,9 @@ $(document).ready(handleReady);
 
 
 let numberOne;
-let simpleMathOperator;
+`let simpleMathOperator;`
 let numberTwo;
+let operator = simpleMathOperator
 
 function handleReady() {
     console.log("jquery is loaded!")
@@ -22,7 +23,7 @@ function equationValue() {
     operator: simpleMathOperator
   }  
   
-  }
+  
   $.ajax({
     url: '/mathsInput',
     method: 'POST',
@@ -35,42 +36,31 @@ function equationValue() {
 }).catch((error)=>{
   console.log('POST FAILED', error)
 })
-  
+} 
 
 
 function gettingHistory() {
+  $('#history').empty();
+
   $.ajax({ 
-    url: '/maths',
+    url: '/mathsInput',
     method: 'GET'
 }).then((response)=>{
     console.log('GEt IS WORKING', response)
 
-    appendDom(response);
+    // appendDom(response);
 
   }).catch((error)=>{
     console.log('POST FAILED', error)
   })
-//     $('#answer').empty();
-//     $('#history').empty();
-//     for (let equation of response) {
-//       let total = Math.round(`${equation.answer}`) 
-//     $('.answer').append(total)
-//     $('.history').append(` 
-//       <li>${equation.numberOne} ${equation.operator} ${equation.numberTwo} = ${answer}</li>
-//     `)
-//   }
-// })
 
-}
-
-function appendDom(response) {
-    $('#history').empty();
-    for (let calcObject of response.historyIn) {
+ 
+    // for (let calcObject of response) {
     $('#history').append(` 
-      <li>${calcObject.number1} ${calcObject.simpleMathOperator} ${calcObject.number2} = ${answer}</li>
+      <li>${mathOne.number1} ${operator.simpleMathOperator} ${mathTwo.number2} = ${answer}</li>
     `)
   }
-}
+
 
 
 

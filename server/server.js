@@ -8,6 +8,8 @@ const PORT = 5000;
 
 let historyIn = [];
 let theNumber;
+let answer = equationIn
+// let answerIn = answer;
 
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -29,9 +31,9 @@ app.post('/mathsInput', (req, res)=>{
   res.sendStatus(201);
 })
 
-app.get('/maths', (req, res)=>{
+app.get('/mathsInput', (req, res)=>{
   console.log('test GET');
-  res.send(maths);
+  res.send();
 })
 
 
@@ -50,7 +52,7 @@ switch (theNumber.simpleMathOperator) {
     answer = Number(theNumber.mathOne) / Number(theNumber.mathTwo) 
      break; 
 }
-}
+
 
 let finalCalc = {
   mathOne: theNumber.mathOne,
@@ -61,7 +63,7 @@ let finalCalc = {
 
 historyIn.push(finalCalc)
 console.log('history array', historyIn);
-
+}
 app.listen(PORT, () => {
   console.log ('Server is running on port', PORT)
 })
