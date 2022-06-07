@@ -1,10 +1,10 @@
 $(document).ready(handleReady);
 
 
-let numberOne;
-`let simpleMathOperator;`
-let numberTwo;
-let operator = simpleMathOperator
+// let numberOne;
+// let simpleMathOperator;
+// let numberTwo;
+// let operator = simpleMathOperator
 
 function handleReady() {
     console.log("jquery is loaded!")
@@ -14,74 +14,55 @@ function handleReady() {
 
   }
 
+let mathOperator;
 
 
 function equationValue() {
   let theNumber = {
-    mathOne: $('#number1').val(),
-    mathTwo: $('#number2').val(),
-    operator: simpleMathOperator
+    mathOne: $('#mathOne').val(),
+    mathTwo: $('#mathTwo').val(),
+    operator: mathOperator
   }  
-  
-  
   $.ajax({
     url: '/mathsInput',
     method: 'POST',
     data: theNumber
 }).then((response)=>{
   console.log('POST works', response);
-
   gettingHistory();
 
-}).catch((error)=>{
-  console.log('POST FAILED', error)
-})
+// }).catch((error)=>{
+//   console.log('POST FAILED', error)
+});
 } 
 
-
 function gettingHistory() {
-  $('#history').empty();
-
+  // $('#answerIn').empty();
+  // $('#answerIn').append(answerIn);
+  
   $.ajax({ 
     url: '/mathsInput',
     method: 'GET'
-}).then((response)=>{
-    console.log('GEt IS WORKING', response)
-
-    // appendDom(response);
-
-  }).catch((error)=>{
-    console.log('POST FAILED', error)
-  })
-
- 
-    // for (let calcObject of response) {
-    $('#history').append(` 
-      <li>${mathOne.number1} ${operator.simpleMathOperator} ${mathTwo.number2} = ${answer}</li>
-    `)
-  }
-
-
-
+})
+.then((response)=> {
+    console.log('GEt IS WORKING', response) 
+    $('.history').empty();
+    for (let calcObject of response) {
+      let answerIn = Math.round(`${calcObject.answerIn}`) 
+      $('.answerIn').empty();
+      $('.answerIn').append(answerIn);
+    $('.history').append(` 
+      <li>${calcObject.mathOne} ${calcObject.operator} ${calcObject.mathTwo} = ${answerIn}</li>
+    `);
+    }
+  });
+}
 
 function mathServer() {
-  simpleMathOperator = $(this).text()
+  mathOperator = $(this).text()
   }
 
 function clearButton() {
-    $('#mathOne').val('');
-    $('#simpleMathOperator').val('');
-    $('#mathTwo').val('')
+   $('.answerIn').empty();
+   $('input').val('');
 }
-
-
-
-
-
-
-
-
-
-
-
-

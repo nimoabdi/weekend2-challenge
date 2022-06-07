@@ -6,9 +6,9 @@ const app = express();
 const PORT = 5000;
 
 
-let historyIn = [];
-let theNumber;
-let answer = equationIn
+// let history = [];
+// let theNumber;
+// let answer;
 // let answerIn = answer;
 
 
@@ -23,22 +23,24 @@ app.use(express.static('server/public'));
 
 app.post('/mathsInput', (req, res)=>{
   theNumber = req.body;
-  console.log('hope this works');
+  // console.log('hope this works');
   equationIn();
 
 
   // console.log('test POST');
-  res.sendStatus(201);
+  res.sendStatus(200);
 })
 
 app.get('/mathsInput', (req, res)=>{
-  console.log('test GET');
-  res.send();
-})
-
+  // console.log('test GET');
+  res.send(history);
+});
+let history = [];
+let theNumber;
+let answer;
 
 function equationIn() {
-switch (theNumber.simpleMathOperator) {
+switch (theNumber.operator) {
   case '+':
    answer  =  Number(theNumber.mathOne) + Number(theNumber.mathTwo)
     break;
@@ -53,17 +55,16 @@ switch (theNumber.simpleMathOperator) {
      break; 
 }
 
-
-let finalCalc = {
-  mathOne: theNumber.mathOne,
-  mathTwo: theNumber.mathTwo,
-  simpleMathOperator: theNumber.simpleMathOperator,
-  answerIn: answer
+  let finalCalc = {
+    mathOne: theNumber.mathOne,
+    mathTwo: theNumber.mathTwo,
+    operator: theNumber.operator,
+    answerIn: answer
+  }
+history.push(finalCalc)
+console.log('history array', history);
 }
 
-historyIn.push(finalCalc)
-console.log('history array', historyIn);
-}
 app.listen(PORT, () => {
   console.log ('Server is running on port', PORT)
 })
